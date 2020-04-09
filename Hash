@@ -2,65 +2,61 @@
  * @author Dexter Canton
  *
  */
-    public class HashCode {
+public class HashCode {
 
-private int tsize;
- private int sizeOfHash; 
- private HashEntry[] table;
-
+    private int TABLE_SIZE;
+    private int size; 
+    private HashEntry[] table;
+ 
     public HashCode(int ts) {
-        sizeOfHash = 0;
-        tsize = ts;
-        table = new HashEntry[tsize];
-        for (int i = 0; i < tsize; i++)
+        size = 0;
+        TABLE_SIZE = ts;
+        table = new HashEntry[TABLE_SIZE];
+        for (int i = 0; i < TABLE_SIZE; i++)
             table[i] = null;
     } 
-    public int getSize()
-     {
-
-        return sizeOfHash;
+    public int getSize() {
+        return size;
     }
     public void clearTable() {
-
-        //this for loop calcuates the integer before it is used in the last if statement
-        for (int i = 0; i < tsize; i++
-               table[i] = null;
-        sizeOfHash = 0;
+        for (int i = 0; i < TABLE_SIZE; i++)
+            table[i] = null;
+        size = 0;
     }
+    
     public String get(String key) {
-      int index = receiveKey(key);
+        int index = findIndex(key);
         if (table[index] == null) {
         	System.out.println("here");
 			return key;
-	else {
+        }
+		else {
 			System.out.println("password: " + table[index].getValue());
 			return table[index].getValue();
-
-            else if (key) {
-                System.out.println("not here, try again")
-                
-            }
-	}
+		}
     }
-    }
+    
     public void put(String key, String value) {
-        table[receiveKey(key)] = new HashEntry(key, value);Code
+        table[findIndex(key)] = new HashEntry(key, value);
         size++;
     }
-  public void remove(String key) {
-        table[receiveKey(key)] = null;
-        sizeOfHash--;
+
+    public void remove(String key) {
+        table[findIndex(key)] = null;
+        size--;
     }
+
     private int calculateHashCode(String key) {
-        int mod = key.hashCode() % tsize;
-        return mod < 0 ? mod + tsize : mod;
+        int mod = key.hashCode() % TABLE_SIZE;
+        return mod < 0 ? mod + TABLE_SIZE : mod;
     }
+    
     private int findIndex(String key) {
         int index = calculateHashCode(key);
-        //Have while loop run to figure out the integer of the hash code 
-        //
-                return index;
-    
-
+        //while (table[index] != null && !table[index].getKey().equals(key)) {
+        //    index = (index + 1) % TABLE_SIZE;
+        //}
+        
+        return index;
     }
-    }
+}
