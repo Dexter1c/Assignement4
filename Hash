@@ -53,10 +53,7 @@ public class HashCode {
     
     private int findIndex(String key) {
         int index = calculateHashCode(key);
-        //while (table[index] != null && !table[index].getKey().equals(key)) {
-        //    index = (index + 1) % TABLE_SIZE;
-        //}
-        
+      
         return index;
     }
 }
